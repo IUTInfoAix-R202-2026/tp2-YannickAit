@@ -29,7 +29,15 @@
     // Avec les Codespace prebuilds activés, ça permet que le cache Maven soit
     // baké directement dans l'image (car les prebuilds stockent l'image, pas
     // les volumes). bash -lc sert à charger le PATH de SDKMAN (Java).
-    "onCreateCommand": "bash -lc './mvnw -q dependency:go-offline || true' && gh repo set-default \"$(git remote get-url origin | sed 's|.*github.com[:/]||' | sed 's|\\.git$||')\" 2>/dev/null || true",
+    //
+    // On utilise `test-compile` (et pas `dependency:go-offline`) pour deux
+    // raisons : (1) télécharger toutes les dépendances main + test, et (2)
+    // produire les .class pour main et test. Conséquence : quand l'étudiant
+    // ouvre un .java pour la première fois, le Java Language Server importe
+    // un projet déjà résolu - les CodeLens "Run | Debug" et les flèches de
+    // tests apparaissent quasi immédiatement au lieu d'attendre l'indexation
+    // complète à froid (30-90 s sur Codespaces sans prebuild).
+    "onCreateCommand": "bash -lc './mvnw -q test-compile || true' && gh repo set-default \"$(git remote get-url origin | sed 's|.*github.com[:/]||' | sed 's|\\.git$||')\" 2>/dev/null || true",
     "customizations": {
         "vscode": {
             "settings": {

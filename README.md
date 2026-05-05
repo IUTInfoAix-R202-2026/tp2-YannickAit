@@ -328,10 +328,11 @@ sequenceDiagram
 ### Découverte du code
 
 1. Ouvrez `src/main/java/fr/univ_amu/iut/exercice1/ProprieteSimple.java`. Vous y trouverez :
-   - Un champ `IntegerProperty anIntProperty` déjà déclaré
-   - Trois méthodes avec des TODO : `creerPropriete()`, `ajouterEtRetirerInvalidationListener()`, `ajouterEtRetirerChangeListener()`
+   - Un champ `IntegerProperty anIntProperty` déjà déclaré, ainsi que `invalidationListener` et `changeListener` pour stocker les observateurs
+   - La méthode `creerPropriete()` **entièrement fournie** (instanciation + trois affichages)
+   - Les méthodes `ajouterEtRetirerInvalidationListener()` et `ajouterEtRetirerChangeListener()` avec le scénario `setValue/set` déjà fourni et **deux TODO ciblés chacune** : afficher le header `Add ... listener.` + créer + abonner le listener, puis afficher le header `Remove ... listener.` + retirer le listener
    - Les accesseurs JavaBeans `getAnInt()`, `setAnInt()`, `anIntProperty()` déjà implémentés
-   - Une méthode `main()` prête qui appelle vos trois méthodes dans l'ordre
+   - Une méthode `main()` prête qui appelle les trois méthodes dans l'ordre
 
 2. Ouvrez `src/test/java/fr/univ_amu/iut/exercice1/ProprieteSimpleTest.java`. Lisez les assertions - elles décrivent exactement la sortie console attendue. Les tests utilisent Mockito pour vérifier ce qui est affiché sur `System.out`.
 
@@ -386,20 +387,35 @@ Remarquez les différences :
 
 ### Travail à faire
 
+Pour vous concentrer sur le mécanisme d'observation, **les affichages et le scénario sont entièrement fournis** dans `ProprieteSimple.java`. La méthode `creerPropriete()` est complète, et dans les deux méthodes de listener, seuls les `addListener()` et `removeListener()` sont à écrire (4 ajouts au total).
+
 1. **Créez une branche** : `git checkout -b exercice1`
-2. **Activez** les 2 premiers tests (supprimez `@Disabled` sur les tests 1-2)
-3. **Vérifiez** que les tests passent déjà (les accesseurs sont fournis) : `./mvnw test`
-4. **Activez** les tests 3-5 et implémentez `creerPropriete()` :
-   - Instanciez `anIntProperty` si elle est null
-   - Affichez les trois lignes avec `System.out.println()`
-5. **Activez** les tests 6-9 et implémentez `ajouterEtRetirerInvalidationListener()` :
-   - Créez le listener avec une lambda : `observable -> System.out.println("...")`
-   - Abonnez-le avec `anIntProperty.addListener(invalidationListener)`
-   - Affichez les messages et changez la valeur comme indiqué dans le TODO
-   - Retirez le listener avec `removeListener()`
-6. **Activez** les tests 10-12 et implémentez `ajouterEtRetirerChangeListener()` :
-   - Créez le listener avec une lambda à 3 paramètres : `(observable, oldValue, newValue) -> ...`
-   - Même pattern : abonner, changer la valeur, désabonner
+2. **Activez les tests 1-5** : ils passent immédiatement, sans rien implémenter (les accesseurs et `creerPropriete()` sont fournis). Vérifiez avec `./mvnw test`.
+3. **Lancez `ProprieteSimple.main()` une première fois** (clic droit sur la méthode `main()` -> *Run Java* dans VSCode, ou bouton *Run* de votre IDE). Observez la sortie console : vous voyez les informations de la propriété (les trois lignes affichées par `creerPropriete()`) puis le scénario brut (`setValue() with 1024.`, `set() with 2105.`, ...) sans aucun message d'observation. Aucune ligne `Add ... listener.`, `Remove ... listener.`, ni de notification de changement n'apparaît : les listeners ne sont pas encore abonnés.
+4. **Activez les tests 6-9** et complétez `ajouterEtRetirerInvalidationListener()` (deux blocs à compléter) :
+   - Au premier TODO, écrivez 3 lignes :
+     1. Affichez `"Add invalidation listener."` avec `System.out.println(...)`.
+     2. Créez l'`InvalidationListener` avec une lambda `observable -> System.out.println("The observable has been invalidated.")` et stockez-le dans `this.invalidationListener`.
+     3. Abonnez-le via `anIntProperty.addListener(invalidationListener)`.
+   - Au second TODO, écrivez 2 lignes :
+     1. Affichez `"Remove invalidation listener."`.
+     2. Retirez le listener via `anIntProperty.removeListener(invalidationListener)`.
+5. **Activez les tests 10-12** et complétez `ajouterEtRetirerChangeListener()` (deux blocs à compléter) :
+   - Au premier TODO, écrivez 3 lignes :
+     1. Affichez `"Add change listener."`.
+     2. Créez le `ChangeListener<Number>` avec une lambda à 3 paramètres `(observable, oldValue, newValue) -> System.out.println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)` et stockez-le dans `this.changeListener`.
+     3. Abonnez-le via `anIntProperty.addListener(changeListener)`.
+   - Au second TODO, écrivez 2 lignes :
+     1. Affichez `"Remove change listener."`.
+     2. Retirez le listener via `anIntProperty.removeListener(changeListener)`.
+6. **Relancez `ProprieteSimple.main()`** et comparez avec le premier run. De nouvelles lignes apparaissent à chaque endroit où votre code abonne, désabonne, ou voit la propriété changer :
+   - `Add invalidation listener.` / `Remove invalidation listener.` (vos `addListener`/`removeListener` s'exécutent)
+   - `The observable has been invalidated.` (une seule fois, à cause du comportement paresseux)
+   - `Add change listener.` / `Remove change listener.`
+   - `The observableValue has changed: oldValue = 1024, newValue = 2105`
+   - `The observableValue has changed: oldValue = 2105, newValue = 5012`
+   
+   Cette différence est exactement ce que les listeners apportent : la possibilité d'**être notifié** quand une propriété change.
 7. **Vérifiez** que les 12 tests passent : `./mvnw test`
 8. **Finalisez** :
 
@@ -447,12 +463,13 @@ graph LR
 
 1. Ouvrez `src/main/java/fr/univ_amu/iut/exercice2/LiaisonProprietes.java`. Vous y trouverez :
    - Un champ `anIntProperty` déjà présent (hérité de l'exercice 1)
-   - Une méthode `lierEtDelierProprietes()` avec un TODO détaillé
-   - La sortie console attendue est documentée en Javadoc au-dessus de la méthode
+   - Une méthode `lierEtDelierProprietes()` avec **le scénario `setValue/set` déjà fourni** et **deux TODO ciblés** : afficher le header `Binding ...` + appeler `bind()`, puis afficher le header `Unbinding ...` + appeler `unbind()`
+   - Les accesseurs JavaBeans `getAnInt()`, `setAnInt()`, `anIntProperty()` déjà implémentés
+   - Une méthode `main()` prête qui appelle `lierEtDelierProprietes()`
 
 2. Ouvrez `src/test/java/fr/univ_amu/iut/exercice2/LiaisonProprietesTest.java`. Observez les deux catégories de tests :
    - Les tests 1-4 sont des **tests unitaires purs** : ils créent eux-mêmes des propriétés locales et vérifient le comportement de `bind()`, `unbind()` et `isBound()`. Ces tests ne dépendent pas de votre implémentation de `lierEtDelierProprietes()`.
-   - Les tests 5-8 vérifient la **sortie console** de `lierEtDelierProprietes()` via un mock de `System.out`.
+   - Les tests 5-8 vérifient la **sortie console** de `lierEtDelierProprietes()` via un mock de `System.out`. Le test 5 (vérification de `otherProperty.get() = 0`) passe immédiatement car la ligne correspondante est fournie ; les tests 6-8 nécessitent vos `bind()` et `unbind()`.
 
 ### Sortie console attendue de `lierEtDelierProprietes()`
 
@@ -489,14 +506,27 @@ Remarquez que la dernière ligne affiche encore 7168, pas 8192 : après `unbind(
 
 ### Travail à faire
 
+Pour vous concentrer sur le mécanisme de liaison, **le scénario d'affichage et les modifications de la source sont entièrement fournis** dans `LiaisonProprietes.java`. Seuls les deux appels `bind()` et `unbind()` (avec leurs headers respectifs) sont à écrire (4 lignes au total).
+
 1. **Créez une branche** : `git checkout -b exercice2`
-2. **Activez les tests 1-4** (les 4 tests unitaires) - ils doivent déjà passer sans aucun code de votre part, car `bind()` et `unbind()` sont des méthodes standard de JavaFX que vous utilisez directement dans les tests. Vérifiez : `./mvnw test`
-3. **Activez les tests 5-8** et implémentez `lierEtDelierProprietes()` :
-   - Créez `otherProperty` avec `new SimpleIntegerProperty(0)`
-   - Suivez les 10 étapes documentées dans le TODO de la méthode (chaque `println` + action correspondante)
-4. **Vérifiez** que les 8 tests passent : `./mvnw test`
-5. **Testez visuellement** la sortie console : `./mvnw exec:java -Dexec.mainClass="fr.univ_amu.iut.exercice2.LiaisonProprietes"` (ou cliquez sur la flèche "Run" à côté de `main()` dans VS Code)
-6. **Finalisez** :
+2. **Activez les tests 1-5** : ils passent immédiatement, sans rien implémenter (les tests 1-4 sont des tests unitaires purs sur `bind`/`unbind`/`isBound`, le test 5 vérifie une ligne déjà fournie). Vérifiez avec `./mvnw test`.
+3. **Lancez `LiaisonProprietes.main()` une première fois** (clic droit sur la méthode `main()` -> *Run Java* dans VSCode, ou bouton *Run* de votre IDE). Observez la sortie console : `otherProperty.get() = 0` apparaît partout, même après `Calling anIntProperty.set(7168).` puis `Calling anIntProperty.set(8192).`. Normal : sans `bind()`, `otherProperty` est totalement indépendante de `anIntProperty`. Aucun header `Binding ...` ni `Unbinding ...` non plus.
+4. **Activez les tests 6-8** et complétez `lierEtDelierProprietes()` (deux blocs à compléter) :
+   - Au premier TODO, écrivez 2 lignes :
+     1. Affichez `"Binding otherProperty to anIntProperty."` avec `System.out.println(...)`.
+     2. Liez via `otherProperty.bind(anIntProperty)`.
+   - Au second TODO, écrivez 2 lignes :
+     1. Affichez `"Unbinding otherProperty from anIntProperty."`.
+     2. Déliez via `otherProperty.unbind()`.
+5. **Relancez `LiaisonProprietes.main()`** et comparez avec le premier run. Vous devriez voir :
+   - Les deux headers `Binding ...` et `Unbinding ...` apparaître.
+   - `otherProperty.get() = 1024` juste après le bind (la valeur de la source a été propagée).
+   - `otherProperty.get() = 7168` (×3) après `set(7168)` (la propagation est continue).
+   - **Mais après `unbind()` puis `set(8192)`** : `otherProperty.get() = 7168` reste 7168, pas 8192. La cible a conservé sa dernière valeur et ne suit plus la source.
+   
+   Cette différence est exactement ce que `bind()` apporte : la cible **suit** la source tant que la liaison existe, et **fige sa dernière valeur** quand on délie.
+6. **Vérifiez** que les 8 tests passent : `./mvnw test`
+7. **Finalisez** :
 
 ```bash
 git add src/main/java/fr/univ_amu/iut/exercice2/
