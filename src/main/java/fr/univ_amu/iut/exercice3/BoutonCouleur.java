@@ -45,6 +45,7 @@ public class BoutonCouleur extends Button {
   public BoutonCouleur(String texte, String couleur) {
     super(texte);
     this.couleur = couleur;
+    addEventHandler(javafx.event.ActionEvent.ACTION, e -> nbClics.set(getNbClics() + 1));
   }
 
   public int getNbClics() {
