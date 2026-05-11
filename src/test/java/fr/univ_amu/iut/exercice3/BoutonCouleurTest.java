@@ -3,7 +3,6 @@ package fr.univ_amu.iut.exercice3;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javafx.beans.property.IntegerProperty;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ import org.testfx.framework.junit5.ApplicationExtension;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BoutonCouleurTest {
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(1)
   void testLeTexteEstCorrect() {
@@ -26,7 +24,6 @@ class BoutonCouleurTest {
         .isEqualTo("Rouge");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(2)
   void testLaCouleurEstStockee() {
@@ -36,7 +33,6 @@ class BoutonCouleurTest {
         .isEqualTo("green");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(3)
   void testNbClicsInitialEstZero() {
@@ -44,7 +40,6 @@ class BoutonCouleurTest {
     assertThat(btn.getNbClics()).as("getNbClics() doit retourner 0 avant tout clic").isEqualTo(0);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(4)
   void testNbClicsPropertyRetourneUnePropriete() {
@@ -58,7 +53,6 @@ class BoutonCouleurTest {
         .isEqualTo(btn.getNbClics());
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(5)
   void testClicIncrementeNbClics() {
@@ -67,7 +61,6 @@ class BoutonCouleurTest {
     assertThat(btn.getNbClics()).as("Après un clic, getNbClics() doit valoir 1").isEqualTo(1);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(6)
   void testDeuxClicsIncrementent() {
@@ -77,7 +70,6 @@ class BoutonCouleurTest {
     assertThat(btn.getNbClics()).as("Après deux clics, getNbClics() doit valoir 2").isEqualTo(2);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(7)
   void testLaPropertyEstLieeAuCompteur() {
