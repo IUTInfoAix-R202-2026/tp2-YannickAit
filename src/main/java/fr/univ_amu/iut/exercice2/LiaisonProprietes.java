@@ -77,6 +77,25 @@ public class LiaisonProprietes {
     //
     // 10. Afficher "otherProperty.get() = " + otherProperty.get()
     //     -> Affiche 7168 (plus de liaison, la cible ne suit plus).
+
+    IntegerProperty anIntProperty = new SimpleIntegerProperty(1024);
+    IntegerProperty otherProperty = new SimpleIntegerProperty(0);
+    System.out.println(" ");
+    System.out.println("otherProperty.get() = " + otherProperty.get());
+    System.out.println("Binding otherProperty to anIntProperty.");
+    otherProperty.bind(anIntProperty);
+    System.out.println("otherProperty.get() = " + otherProperty.get());
+    System.out.println("Calling anIntProperty.set(7168).");
+    anIntProperty.set(7168);
+    System.out.println("otherProperty.get() = " + otherProperty.get());
+    System.out.println("otherProperty.get() = " + otherProperty.get());
+    System.out.println("otherProperty.get() = " + otherProperty.get());
+    System.out.println("Unbinding otherProperty from anIntProperty.");
+    otherProperty.unbind();
+    System.out.println("otherProperty.get() = " + otherProperty.get());
+    System.out.println("Calling anIntProperty.set(8192).");
+    anIntProperty.set(8192);
+    System.out.println("otherProperty.get() = " + otherProperty.get());
   }
 
   public int getAnInt() {
