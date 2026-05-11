@@ -10,7 +10,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -39,7 +38,6 @@ class LiaisonProprietesTest {
 
   // --- Tests unitaires sur le mécanisme bind/unbind (sans console) ---
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(1)
   void testBindPropageLaValeur() {
@@ -53,7 +51,6 @@ class LiaisonProprietesTest {
         .isEqualTo(42);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(2)
   void testLaCibleSuitLaSource() {
@@ -68,7 +65,6 @@ class LiaisonProprietesTest {
         .isEqualTo(100);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(3)
   void testUnbindArreteLaPropagation() {
@@ -85,7 +81,6 @@ class LiaisonProprietesTest {
         .isEqualTo(100);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(4)
   void testIsBoundRetourneTrueSiLiee() {
@@ -103,7 +98,6 @@ class LiaisonProprietesTest {
 
   // --- Tests sur la sortie console de lierEtDelierProprietes() ---
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(5)
   void testAfficheValeurInitialeAvantLiaison() {
@@ -111,7 +105,6 @@ class LiaisonProprietesTest {
     verify(out).println("otherProperty.get() = 0");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(6)
   void testLiaisonPropageLaValeurSource() {
@@ -120,7 +113,6 @@ class LiaisonProprietesTest {
     verify(out).println("otherProperty.get() = 1024");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(7)
   void testChangementSourcePropageVersCible() {
@@ -132,7 +124,6 @@ class LiaisonProprietesTest {
     verify(out, atLeast(3)).println("otherProperty.get() = 7168");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(8)
   void testApresUnbindLaCibleNeSuitPlus() {
