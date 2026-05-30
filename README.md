@@ -1002,7 +1002,7 @@ Sans ce drapeau, le listener sur `celsius` modifie `fahrenheit`, qui declenche l
 
 4. **Activez les tests 8-11** : vérifiez que les TextFields restent synchronisés après les conversions. Si le binding bidirectionnel entre les TextFields et les sliders est en place depuis l'étape 2, cela doit fonctionner automatiquement.
 
-5. **Style (pour coller à la maquette, non testé)** : chaque slider + champ vit dans un panneau (`VBox` centré, bordé). En tête de chaque panneau, un `Label` pleine largeur sert d'**en-tête de carte coloré** : « Celsius (°C) » sur fond bleu `#4a90d9`, « Fahrenheit (°F) » sur fond rouge `#e74c3c`, texte blanc gras (`label.setMaxWidth(Double.MAX_VALUE)` + `setStyle("-fx-background-color: #4a90d9; -fx-text-fill: white; ... -fx-alignment: center;")`).
+5. **Style (pour coller à la maquette, non testé)** : chaque slider + champ vit dans un panneau (`VBox` centré, bordé). En tête de chaque panneau, un `Label` pleine largeur sert d'**en-tête de carte coloré** : « Celsius (°C) » sur fond bleu `#4a90d9`, « Fahrenheit (°F) » sur fond rouge `#e74c3c`, texte blanc gras (`label.setMaxWidth(Double.MAX_VALUE)` + `setStyle("-fx-background-color: #4a90d9; -fx-text-fill: white; ... -fx-alignment: center;")`). Donnez la **même largeur aux deux cartes** (`setPrefWidth(170)` sur chaque `VBox`) pour qu'elles soient symétriques.
 
 5. **Vérifiez** : `./mvnw javafx:run` et `./mvnw test`
 
