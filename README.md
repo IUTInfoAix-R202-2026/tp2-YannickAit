@@ -293,37 +293,11 @@ Cet exercice est entièrement en **console** (pas d'interface graphique). Son ob
 
 Une propriété JavaFX est une **boîte observable** : elle contient une valeur et prévient automatiquement tous les observateurs abonnés quand cette valeur change. C'est un mécanisme général de liaison de données, utile bien au-delà des interfaces graphiques.
 
-```mermaid
-graph LR
-    P["IntegerProperty<br/>valeur = 1024"]
-    IL["InvalidationListener<br/>(paresseux)"]
-    CL["ChangeListener<br/>(eager)"]
-    P -- "addListener()" --> IL
-    P -- "addListener()" --> CL
-    P -- "set(2105)" --> N["Notification"]
-    N -. "1 seule fois<br/>tant que non relu" .-> IL
-    N -- "à chaque changement<br/>old=1024, new=2105" --> CL
-```
+<img alt="Anatomie d'une propriété : un IntegerProperty notifie ses InvalidationListener (paresseux, une seule fois) et ChangeListener (à chaque changement, avec old/new)" src=".github/assets/ex1-propriete-listeners.svg"/>
 
 **Insight clé :** un `InvalidationListener` est *paresseux* - il se déclenche une seule fois quand la propriété devient invalide, et ne se redéclenche qu'après que la valeur ait été relue (via `get()`, ce qui la "revalide"). Un `ChangeListener` est *eager* - il se déclenche à **chaque** modification et reçoit l'ancienne et la nouvelle valeur.
 
-```mermaid
-sequenceDiagram
-    participant Code
-    participant Prop as IntegerProperty
-    participant IL as InvalidationListener
-    
-    Code->>Prop: set(2105)
-    Prop->>IL: invalidated() ✅
-    Note over IL: Notifié !
-    Code->>Prop: set(5012)
-    Note over IL: PAS notifié ❌<br/>(pas de get() entre-temps)
-    Code->>Prop: get()
-    Note over Prop: Revalidée
-    Code->>Prop: set(1024)
-    Prop->>IL: invalidated() ✅
-    Note over IL: Notifié à nouveau !
-```
+<img alt="InvalidationListener vs ChangeListener : l'InvalidationListener n'est notifié qu'une fois tant que la propriété n'est pas relue (get)" src=".github/assets/ex1-invalidation-vs-change.svg"/>
 
 ### Découverte du code
 
@@ -450,14 +424,7 @@ Toujours en **console**, cet exercice introduit le mécanisme de *binding* unidi
 
 Le binding unidirectionnel crée une dépendance à sens unique : `cible` suit `source`, mais l'inverse n'est pas vrai. Dès que `source` change de valeur, `cible` se met à jour automatiquement. Si l'on tente de modifier `cible` directement via `set()` alors qu'elle est liée, JavaFX lève une `RuntimeException` - c'est une protection : la cible est sous le contrôle exclusif de sa source.
 
-```mermaid
-graph LR
-    S["source\nSimpleIntegerProperty\nvaleur = 42"]
-    C["cible\nSimpleIntegerProperty\nisBound = true"]
-    S -- "cible.bind(source)" --> C
-    S -- "source.set(99)" --> S2["source\nvaleur = 99"]
-    S2 -- "propagation auto" --> C2["cible\nvaleur = 99"]
-```
+<img alt="Binding unidirectionnel : cible.bind(source) ; quand source change, la valeur se propage automatiquement à la cible" src=".github/assets/ex2-binding-unidirectionnel.svg"/>
 
 ### Découverte du code
 
@@ -562,17 +529,7 @@ Le TP1 (exercice 6) utilisait une approche impérative : un tableau `int[] compt
 
 Le TP2 adopte une approche déclarative. La différence est fondamentale :
 
-```mermaid
-graph TD
-    subgraph TP1 - Imperatif
-        C1["Clic sur Rouge"] --> H1["handler:\nnbClics[0]++\nlabelTotal.setText(...)"]
-    end
-    subgraph TP2 - Declaratif
-        C2["Clic sur Rouge"] --> H2["handler:\nnbClics.set(nbClics.get()+1)"]
-        H2 -.propagation auto.-> B2["Binding:\nBindings.concat('Rouge: ', nbClics)"]
-        B2 -.mis a jour auto.-> L2["labelCompteurs.textProperty()"]
-    end
-```
+<img alt="Impératif (TP1) vs déclaratif (TP2) : au lieu d'un handler qui met à jour le label, un binding propage automatiquement la valeur de la propriété" src=".github/assets/ex3-imperatif-vs-declaratif.svg"/>
 
 ### Maquette attendue
 
@@ -692,32 +649,13 @@ Cet exercice est une **classe de calcul sans interface graphique**. Vous allez m
 
 La convention JavaBeans est un contrat d'exposition des propriétés JavaFX. Pour chaque propriété nommée `foo` de type `T`, la classe doit exposer trois méthodes :
 
-```mermaid
-graph LR
-    P["IntegerProperty x1\n(champ privé)"]
-    G["getX1()\nretourne x1.get()"]
-    S["setX1(int v)\nx1.set(v)"]
-    A["x1Property()\nretourne x1"]
-    P --> G
-    P --> S
-    P --> A
-```
+<img alt="Convention JavaBeans : un champ IntegerProperty x1 exposé par getX1(), setX1(int) et x1Property()" src=".github/assets/ex4-convention-javabeans.svg"/>
 
 Ce triplet permet à JavaFX, aux outils (Scene Builder, IntelliJ) et aux frameworks de découvrir et lier les propriétés automatiquement, sans connaître les détails de l'implémentation.
 
 ### Le graphe de dépendances du binding
 
-```mermaid
-graph TD
-    x1 --> det["determinant\nNumberBinding"]
-    y1 --> det
-    x2 --> det
-    y2 --> det
-    x3 --> det
-    y3 --> det
-    det --> abs["Bindings.when(det >= 0)\n.then(det / 2)\n.otherwise(-det / 2)"]
-    abs --> area["area\nDoubleProperty (lié)"]
-```
+<img alt="Graphe de dépendances du binding d'aire : les six coordonnées alimentent le déterminant, puis la valeur absolue, puis la propriété area" src=".github/assets/ex4-graphe-dependances.svg"/>
 
 Dès qu'une coordonnée change, JavaFX recalcule automatiquement toute la chaîne jusqu'à `area`. Aucun appel manuel n'est nécessaire.
 
@@ -822,30 +760,7 @@ C'est une illustration concrète de la **puissance des bindings** : `AireTriangl
 
 ### Schéma des liaisons (bindings)
 
-```mermaid
-graph LR
-    SX1["#slider-x1"]
-    SY1["#slider-y1"]
-    SX2["#slider-x2"]
-    SY2["#slider-y2"]
-    SX3["#slider-x3"]
-    SY3["#slider-y3"]
-    TF["#aire (TextField)"]
-    L1["Line 1 (P1-P2)"]
-    L2["Line 2 (P2-P3)"]
-    L3["Line 3 (P3-P1)"]
-    AT["AireTriangle\nx1,y1,x2,y2,x3,y3\nareaProperty()"]
-    SX1 -- "x1Property().bind(value)" --> AT
-    SY1 -- "y1Property().bind(value)" --> AT
-    SX2 -- "x2Property().bind(value)" --> AT
-    SY2 -- "y2Property().bind(value)" --> AT
-    SX3 -- "x3Property().bind(value)" --> AT
-    SY3 -- "y3Property().bind(value)" --> AT
-    AT -- "areaProperty().asString()" --> TF
-    AT -- "start (x1,y1), end (x2,y2), ×50" --> L1
-    AT -- "start (x2,y2), end (x3,y3), ×50" --> L2
-    AT -- "start (x3,y3), end (x1,y1), ×50" --> L3
-```
+<img alt="Schéma des liaisons : les six sliders sont liés aux propriétés d'AireTriangle, qui alimente le TextField d'aire et les trois Line du dessin" src=".github/assets/ex5-liaisons-bindings.svg"/>
 
 ### Maquette attendue
 
@@ -957,17 +872,7 @@ Ce pattern est directement lié au concept d'**affordance** vu en CM2 : un bouto
 
 L'affordance est la propriété d'un objet qui suggère son utilisation. En IHM, désactiver un bouton tant que les conditions ne sont pas remplies est une forme d'affordance : l'utilisateur comprend immédiatement ce qu'il doit faire pour pouvoir cliquer.
 
-```mermaid
-graph TD
-    userId["#user-id\ntextProperty()"]
-    pwd["#pwd\ntextProperty()"]
-
-    userId -- "longueur >= 6" --> pwdEditable["pwd.editableProperty()"]
-    userId -- "inclus dans" --> binValide["BooleanBinding\nformValid.computeValue()"]
-    pwd -- "longueur >= 8\n+ majuscule\n+ chiffre" --> binValide
-    binValide -- "not()" --> okDisable["#btn-ok\ndisableProperty()"]
-    binValide --> cancelActive["#btn-cancel\ndisableProperty()"]
-```
+<img alt="Affordance et binding : la validité du formulaire (BooleanBinding) pilote l'éditabilité du mot de passe et l'activation des boutons OK / Annuler" src=".github/assets/ex6-affordance-binding.svg"/>
 
 **Insight clé :** `BooleanBinding.computeValue()` est appelé automatiquement par JavaFX chaque fois qu'une dépendance déclarée change. Vous n'avez jamais à appeler `valider()` ni `rafraichir()`.
 
@@ -1090,16 +995,7 @@ Cet exercice synchronise **trois contrôles** sur une même valeur : un `Circle`
 
 La différence entre les deux modes de liaison est fondamentale :
 
-```mermaid
-graph LR
-    subgraph bind - unidirectionnel
-        A1["source"] -- "toujours vers" --> B1["cible\n(isBound=true)"]
-    end
-    subgraph bindBidirectional - dans les deux sens
-        A2["propriete A"] <-- "modification" --> B2["propriete B"]
-        B2 <-- "modification" --> A2
-    end
-```
+<img alt="bind (unidirectionnel : source vers cible) vs bindBidirectional (les deux propriétés se synchronisent dans les deux sens)" src=".github/assets/ex7-bind-vs-bidirectionnel.svg"/>
 
 - `bind()` : la cible suit la source. La cible ne peut pas être modifiée directement.
 - `bindBidirectional()` : les deux propriétés restent indépendantes mais se synchronisent mutuellement. Modifier l'une met à jour l'autre, et vice versa.
@@ -1206,11 +1102,7 @@ La formule de conversion : `F = C * 9/5 + 32` (et l'inverse `C = (F - 32) * 5/9`
 
 Quand deux propriétés se synchronisent mutuellement via `ChangeListener`, il y a un risque de boucle infinie : modifier A declenche le listener qui modifie B, qui declenche le listener qui modifie A, a l'infini.
 
-```mermaid
-graph LR
-    C["sliderCelsius\nvaleur = 100"] -- "ChangeListener\nF = C*9/5+32" --> F["sliderFahrenheit\nvaleur = 212"]
-    F -- "ChangeListener\nC = (F-32)*5/9" --> C
-```
+<img alt="Risque de boucle infinie : deux sliders liés par des ChangeListener réciproques (Celsius vers Fahrenheit et inverse)" src=".github/assets/ex8-boucles-infinies.svg"/>
 
 Le motif classique pour eviter cela est le **drapeau "en cours de mise a jour"** :
 
@@ -1334,15 +1226,7 @@ Animer une balle qui rebondit sur les bords d'une fenêtre. Cet exercice introdu
 
 ### Architecture réactive du rebond
 
-```mermaid
-graph LR
-    VX["vitesseX\nDoubleProperty"]
-    CX["cercle.centerX\nDoubleProperty"]
-    BORD["toucheBordX\nBooleanBinding\n(centerX <= r || centerX >= largeur-r)"]
-
-    CX --> BORD
-    BORD -- "Bindings.when(toucheBord)\n.then(vitesseX.negate())\n.otherwise(vitesseX)" --> VX
-```
+<img alt="Architecture réactive du rebond : un BooleanBinding détecte le contact avec le bord et inverse la vitesse via Bindings.when().then().otherwise()" src=".github/assets/bonus9-architecture-rebond.svg"/>
 
 ### Travail à faire
 
@@ -1374,15 +1258,7 @@ Implémenter un jeu de Pong complet avec deux raquettes (contrôlées à la sour
 
 ### Architecture générale
 
-```mermaid
-graph TD
-    Timer["AnimationTimer\nboucle de jeu"] --> Deplacement["balle.centerX += vitesseX\nballe.centerY += vitesseY"]
-    Deplacement --> CollisionBord["balle touche bord\nhaut/bas : vitesseY.negate()"]
-    Deplacement --> CollisionRaquette["balle intersecte raquette\n: vitesseX.negate()"]
-    Deplacement --> Sortie["balle sort par gauche/droite\n: score++ + reset position"]
-    ScoreG["scoreGauche\nIntegerProperty"] --> LabelG["labelScoreGauche\n(lié par binding)"]
-    ScoreD["scoreDroite\nIntegerProperty"] --> LabelD["labelScoreDroite\n(lié par binding)"]
-```
+<img alt="Architecture du Pong : l'AnimationTimer déplace la balle, gère les collisions et les sorties ; les scores sont liés aux labels par binding" src=".github/assets/bonus10-architecture.svg"/>
 
 ### Travail à faire
 
