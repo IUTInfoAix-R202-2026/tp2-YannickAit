@@ -1026,7 +1026,13 @@ Ces exercices sont facultatifs et s'adressent à celles et ceux qui souhaitent a
 
 ## Bonus 9 - BalleRebondissante (★★★★)
 
-![Balle rebondissante - résultat attendu](src/main/resources/assets/balle_rebondissante.png)
+**Maquette attendue :**
+
+![Maquette BalleRebondissante](src/main/resources/assets/maquette_balle_rebondissante.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Bonus 9 : balle corail qui rebondit, boutons Démarrer (bleu) / Stop" src=".github/assets/apercu-bonus9-balle.png" width="300"/>
 
 ### Objectif
 
@@ -1058,7 +1064,13 @@ Animer une balle qui rebondit sur les bords d'une fenêtre. Cet exercice introdu
 
 ## Bonus 10 - SlowPong (★★★★★)
 
-![Slow Pong - résultat attendu](src/main/resources/assets/slow_pong.png)
+**Maquette attendue :**
+
+![Maquette SlowPong](src/main/resources/assets/maquette_slow_pong.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Bonus 10 : terrain de Pong bleu nuit, deux raquettes grises et la balle blanche" src=".github/assets/apercu-bonus10-pong.png" width="300"/>
 
 ### Objectif
 
