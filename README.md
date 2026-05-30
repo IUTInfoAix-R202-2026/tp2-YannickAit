@@ -820,25 +820,21 @@ C'est la démonstration concrète de la **séparation modèle / vue** : `AireTri
 - [`Line`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/shape/Line.html) et ses propriétés `startXProperty()`, `startYProperty()`, `endXProperty()`, `endYProperty()` liées aux coordonnées du modèle
 - Le **facteur d'échelle** : les coordonnées du modèle (entiers) sont converties en pixels par multiplication
 
-### Architecture modèle / vue
+### Schéma des liaisons (bindings)
 
 ```mermaid
 graph LR
-    subgraph Vue
-        SX1["#slider-x1"]
-        SY1["#slider-y1"]
-        SX2["#slider-x2"]
-        SY2["#slider-y2"]
-        SX3["#slider-x3"]
-        SY3["#slider-y3"]
-        TF["#aire (TextField)"]
-        L1["Line 1 (P1-P2)"]
-        L2["Line 2 (P2-P3)"]
-        L3["Line 3 (P3-P1)"]
-    end
-    subgraph Modele
-        AT["AireTriangle\nx1,y1,x2,y2,x3,y3\nareaProperty()"]
-    end
+    SX1["#slider-x1"]
+    SY1["#slider-y1"]
+    SX2["#slider-x2"]
+    SY2["#slider-y2"]
+    SX3["#slider-x3"]
+    SY3["#slider-y3"]
+    TF["#aire (TextField)"]
+    L1["Line 1 (P1-P2)"]
+    L2["Line 2 (P2-P3)"]
+    L3["Line 3 (P3-P1)"]
+    AT["AireTriangle\nx1,y1,x2,y2,x3,y3\nareaProperty()"]
     SX1 -- "x1Property().bind(value)" --> AT
     SY1 -- "y1Property().bind(value)" --> AT
     SX2 -- "x2Property().bind(value)" --> AT
