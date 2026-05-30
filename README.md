@@ -35,7 +35,7 @@ Les exercices de ce TP sont organisés en progression. Cette progression suit la
 | Niveau Bloom | Exercices | Vous serez capable de... | Compétence BUT |
 |---|---|---|---|
 | **Comprendre** | 1-2 | Décrire le fonctionnement des propriétés JavaFX (`IntegerProperty`, `StringProperty`...), distinguer `InvalidationListener` et `ChangeListener`, expliquer les effets de `bind()` et `unbind()` | AC11.02, AC12.02 |
-| **Appliquer** | 3-5 | Intégrer des propriétés dans une interface graphique, construire des bindings calculés (aire d'un triangle, affichage dynamique), connecter un modèle à une vue sans `setText()` | AC11.04, AC12.02 |
+| **Appliquer** | 3-5 | Intégrer des propriétés dans une interface graphique, construire des bindings calculés (aire d'un triangle, affichage dynamique), relier des données à une interface sans `setText()` | AC11.04, AC12.02 |
 | **Analyser / Créer** | 6-8 | Concevoir un binding de bas niveau avec `computeValue()`, synchroniser plusieurs contrôles par `bindBidirectional()`, assembler une application complète avec conversion de grandeurs physiques | AC11.04 |
 
 **Tout au long du TP**, vous pratiquez aussi le **workflow professionnel** (GitHub Classroom, Codespace, Maven, branche -> Pull Request -> review). Ces compétences sont formellement développées et évaluées en **R2.03 (Qualité de développement)**, module couplé à R2.02 par la SAÉ 2.01 commune.
@@ -675,7 +675,7 @@ git push -u origin exercice3
 
 ### Objectif
 
-Cet exercice est une **classe modèle sans interface graphique**. Vous allez modéliser un triangle par ses six coordonnées et calculer son aire via la formule du déterminant. L'objectif est de pratiquer la **convention JavaBeans complète** et les **bindings calculés** avec l'API fluente de JavaFX.
+Cet exercice est une **classe de calcul sans interface graphique**. Vous allez modéliser un triangle par ses six coordonnées et calculer son aire via la formule du déterminant. L'objectif est de pratiquer la **convention JavaBeans complète** et les **bindings calculés** avec l'API fluente de JavaFX.
 
 > Consultez les slides [CM2 #25-28](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html#25) (convention JavaBeans), [#45-47](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html#45) (progression API classique → statique → fluente), et [#48-49](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html#48) (exemple complet de l'aire d'un triangle).
 
@@ -809,16 +809,16 @@ git push -u origin exercice4
 
 ### Objectif
 
-Cet exercice construit une **interface graphique** qui utilise `AireTriangle` (exercice 4) comme modèle. Six `Slider` permettent de modifier les coordonnées du triangle, un `TextField` affiche l'aire mise à jour automatiquement, et un `Pane` dessine le triangle avec trois `Line` dont les positions sont liées aux coordonnées du modèle.
+Cet exercice construit une **interface graphique** qui réutilise la classe `AireTriangle` (exercice 4) pour les calculs. Six `Slider` permettent de modifier les coordonnées du triangle, un `TextField` affiche l'aire mise à jour automatiquement, et un `Pane` dessine le triangle avec trois `Line` dont les positions sont liées aux coordonnées du triangle.
 
-C'est la démonstration concrète de la **séparation modèle / vue** : `AireTriangle` ne sait rien de l'interface graphique, et la vue ne contient aucune logique de calcul.
+C'est une illustration concrète de la **puissance des bindings** : `AireTriangle` ne contient aucun code d'affichage, l'interface ne refait aucun calcul, et tout reste synchronisé automatiquement par les liaisons.
 
 ### Ce que vous allez découvrir
 
 - [`Slider`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Slider.html) et sa propriété [`valueProperty()`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Slider.html#valueProperty()) : un contrôle numérique glissant avec `showTickLabels`, `showTickMarks`, `snapToTicks`
 - [`TextField`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/TextField.html) non éditable, dont `textProperty()` est lié par binding
-- [`Line`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/shape/Line.html) et ses propriétés `startXProperty()`, `startYProperty()`, `endXProperty()`, `endYProperty()` liées aux coordonnées du modèle
-- Le **facteur d'échelle** : les coordonnées du modèle (entiers) sont converties en pixels par multiplication
+- [`Line`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/shape/Line.html) et ses propriétés `startXProperty()`, `startYProperty()`, `endXProperty()`, `endYProperty()` liées aux coordonnées du triangle
+- Le **facteur d'échelle** : les coordonnées du triangle (entiers) sont converties en pixels par multiplication
 
 ### Schéma des liaisons (bindings)
 
@@ -883,7 +883,7 @@ Le facteur d'échelle est 50 : chaque slider varie de **0 à 10**, ce qui corres
 | 5 | `lesSlidersOntDesTickMarks` | `showTickLabels`, `showTickMarks`, `snapToTicks` = true | Config slider |
 | 6 | `leTextFieldAireExiste` | `#aire` existe et `isEditable() == false` | TextField non editable |
 | 7 | `leTextFieldAireEstLieParBinding` | `textProperty().isBound() == true` | `bind()` |
-| 8 | `deplacerSliderModifieAire` | P1(0,0) P2(6,0) P3(0,3) -> TextField contient "9" | Connexion modele/vue |
+| 8 | `deplacerSliderModifieAire` | P1(0,0) P2(6,0) P3(0,3) -> TextField contient "9" | Synchronisation par binding |
 | 9 | `lePanneauDessinExiste` | `#dessin` est un `Pane` | Pane de dessin |
 | 10 | `lesTroisLignesExistent` | 3 objets `Line` dans `#dessin` | Dessin du triangle |
 | 11 | `deplacerSliderModifieLeDessin` | sx1=5, sy1=3 -> `startX=250`, `startY=150` | Binding coords * 50 |
