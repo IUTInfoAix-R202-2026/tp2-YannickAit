@@ -395,7 +395,7 @@ Le TP2 adopte une approche déclarative.
 
 2. **Activez les tests 1-7 de `BoutonCouleurTest`** et complétez `BoutonCouleur` :
    - Dans le constructeur `BoutonCouleur(String texte, String couleur)`, ajoutez : `setOnAction(e -> nbClics.set(nbClics.get() + 1));`
-   - Pour coller à la maquette, **colorez le bouton avec sa couleur** et arrondissez-le : `setStyle("-fx-background-color: " + couleur + "; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;")`
+   - Pour coller à la maquette, **colorez le bouton** (texte blanc, coins arrondis) en reprenant les teintes du TP1 : `"red"` → `#e74c3c`, `"green"` → `#27ae60`, `"blue"` → `#2980b9` (un `switch` sur `couleur`). On garde le nom CSS (`couleur`) pour `getCouleur()` et la coloration de la zone : `setStyle("-fx-background-color: " + teinteBouton + "; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;")`
    - Le champ `nbClics` et les accesseurs sont déjà fournis
    - Vérifiez : `./mvnw test`
 
