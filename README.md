@@ -620,6 +620,7 @@ Le facteur d'échelle est 50 : chaque slider varie de **0 à 10**, ce qui corres
 
 4. **Activez les tests 6-8** et ajoutez le `TextField` aire :
    - `TextField tfAire = new TextField()` avec `setId("aire")` et `setEditable(false)`
+   - Pour coller à la maquette, **colorez le champ en vert** : `setStyle("-fx-control-inner-background: #eafaf1; -fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-border-color: #27ae60; -fx-border-width: 1.5; -fx-border-radius: 3; -fx-background-radius: 3;")`
    - Liez : `tfAire.textProperty().bind(modele.areaProperty().asString())`
    - Liez les sliders au modèle : `sliderX1.valueProperty().bindBidirectional(modele.x1Property())`
 
