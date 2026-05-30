@@ -331,7 +331,9 @@ Le TP1 (exercice 6) utilisait une approche impérative : un tableau `int[] compt
 Le TP2 adopte une approche déclarative. 
 
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette PaletteReactive](src/main/resources/assets/maquette_palette_reactive.svg)
 
@@ -563,7 +565,9 @@ C'est une illustration concrète de la **puissance des bindings** : `AireTriangl
 
 <img alt="Schéma des liaisons : les six sliders sont liés aux propriétés d'AireTriangle, qui alimente le TextField d'aire et les trois Line du dessin" src=".github/assets/ex5-liaisons-bindings.svg"/>
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette CalculatriceTriangle](src/main/resources/assets/maquette_calculatrice_triangle.svg)
 
@@ -679,7 +683,9 @@ L'affordance est la propriété d'un objet qui suggère son utilisation. En IHM,
 
 **Insight clé :** `BooleanBinding.computeValue()` est appelé automatiquement par JavaFX chaque fois qu'une dépendance déclarée change. Vous n'avez jamais à appeler `valider()` ni `rafraichir()`.
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette FormulaireConnexion - état initial vs formulaire valide](src/main/resources/assets/maquette_formulaire_connexion.svg)
 
@@ -816,7 +822,9 @@ La différence entre les deux modes de liaison est fondamentale :
 
 **Contrainte de type :** `bindBidirectional` ne fonctionne qu'entre deux propriétés du **même type**. Pour relier un `TextField` (`StringProperty`) à un `Slider` (`DoubleProperty`), il faut un convertisseur. C'est le rôle du `TextFormatter<Double>` avec un `NumberStringConverter`.
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette CercleInteractif](src/main/resources/assets/maquette_cercle_interactif.svg)
 
@@ -934,7 +942,9 @@ celsius.addListener((obs, old, newVal) -> {
 
 Sans ce drapeau, le listener sur `celsius` modifie `fahrenheit`, qui declenche le listener sur `fahrenheit`, qui remodifie `celsius`, etc. Avec le drapeau, la boucle s'arrête apres la première propagation.
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette ConvertisseurTemperatures](src/main/resources/assets/maquette_convertisseur.svg)
 
@@ -1026,7 +1036,9 @@ Ces exercices sont facultatifs et s'adressent à celles et ceux qui souhaitent a
 
 ## Bonus 9 - BalleRebondissante (★★★★)
 
-**Maquette attendue :**
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette BalleRebondissante](src/main/resources/assets/maquette_balle_rebondissante.svg)
 
@@ -1064,7 +1076,9 @@ Animer une balle qui rebondit sur les bords d'une fenêtre. Cet exercice introdu
 
 ## Bonus 10 - SlowPong (★★★★★)
 
-**Maquette attendue :**
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette SlowPong](src/main/resources/assets/maquette_slow_pong.svg)
 
