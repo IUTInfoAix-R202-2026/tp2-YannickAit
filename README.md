@@ -839,13 +839,16 @@ graph LR
     subgraph Modele
         AT["AireTriangle\nx1,y1,x2,y2,x3,y3\nareaProperty()"]
     end
-    SX1 -- "valueProperty().bindBidirectional(x1)" --> AT
-    SX2 -- "valueProperty().bindBidirectional(x2)" --> AT
-    SX3 -- "valueProperty().bindBidirectional(x3)" --> AT
-    AT -- "areaProperty()" --> TF
-    AT -- "x1Property().multiply(50)" --> L1
-    AT -- "x2Property().multiply(50)" --> L2
-    AT -- "x3Property().multiply(50)" --> L3
+    SX1 -- "x1Property().bind(value)" --> AT
+    SY1 -- "y1Property().bind(value)" --> AT
+    SX2 -- "x2Property().bind(value)" --> AT
+    SY2 -- "y2Property().bind(value)" --> AT
+    SX3 -- "x3Property().bind(value)" --> AT
+    SY3 -- "y3Property().bind(value)" --> AT
+    AT -- "areaProperty().asString()" --> TF
+    AT -- "start (x1,y1), end (x2,y2), ×50" --> L1
+    AT -- "start (x2,y2), end (x3,y3), ×50" --> L2
+    AT -- "start (x3,y3), end (x1,y1), ×50" --> L3
 ```
 
 ### Maquette attendue
