@@ -683,7 +683,10 @@ L'affordance est la propriété d'un objet qui suggère son utilisation. En IHM,
 
 **Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
 
-<img alt="Rendu final - Exercice 6 : formulaire de connexion avec bouton activé par la validation réactive" src=".github/assets/apercu-ex6-formulaire-connexion.png" width="300"/>
+Comme la maquette, deux états : à gauche le formulaire **vide** (mot de passe non éditable, boutons désactivés) ; à droite le formulaire **valide** (OK vert actif, Annuler rouge, message de bienvenue).
+
+<img alt="Exercice 6 - état initial : formulaire vide, OK et Annuler désactivés" src=".github/assets/apercu-ex6-formulaire-connexion.png" width="300"/>
+<img alt="Exercice 6 - formulaire valide : identifiant et mot de passe remplis, OK vert actif, Annuler rouge, message affiché" src=".github/assets/apercu-ex6-formulaire-connexion-valide.png" width="300"/>
 
 ### Les règles de validation
 
