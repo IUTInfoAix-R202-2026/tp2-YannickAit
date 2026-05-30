@@ -328,9 +328,8 @@ C'est la transition mentale fondamentale de ce TP : passer de la pensée **impé
 
 Le TP1 (exercice 6) utilisait une approche impérative : un tableau `int[] compteurs`, et dans chaque handler de clic un `setText()` explicite pour mettre à jour l'affichage. Cette approche fonctionne mais elle est fragile : si on ajoute un bouton, il faut penser à mettre à jour le handler ET le label.
 
-Le TP2 adopte une approche déclarative. La différence est fondamentale :
+Le TP2 adopte une approche déclarative. 
 
-<img alt="Impératif (TP1) vs déclaratif (TP2) : au lieu d'un handler qui met à jour le label, un binding propage automatiquement la valeur de la propriété" src=".github/assets/ex3-imperatif-vs-declaratif.svg"/>
 
 ### Maquette attendue
 
