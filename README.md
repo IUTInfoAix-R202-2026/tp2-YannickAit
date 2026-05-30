@@ -578,6 +578,10 @@ graph TD
 
 ![Maquette PaletteReactive](src/main/resources/assets/maquette_palette_reactive.svg)
 
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 3 : palette de boutons de couleur réactifs" src=".github/assets/apercu-ex3-palette-reactive.png" width="300"/>
+
 ### Découverte du code
 
 1. Ouvrez `src/main/java/fr/univ_amu/iut/exercice3/BoutonCouleur.java`. Vous y trouverez :
@@ -848,6 +852,10 @@ graph LR
 
 ![Maquette CalculatriceTriangle](src/main/resources/assets/maquette_calculatrice_triangle.svg)
 
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 5 : calculatrice de triangle avec sliders et tracé" src=".github/assets/apercu-ex5-calculatrice-triangle.png" width="520"/>
+
 Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce qui correspond à -250 px à 250 px sur le panneau de dessin (centrée sur 250,250). Ainsi, si `x1 = 5`, la ligne part de `5 * 50 = 250` pixels depuis le bord gauche du panneau.
 
 ### Découverte du code
@@ -967,6 +975,10 @@ graph TD
 ### Maquette attendue
 
 ![Maquette FormulaireConnexion - état initial vs formulaire valide](src/main/resources/assets/maquette_formulaire_connexion.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 6 : formulaire de connexion avec bouton activé par la validation réactive" src=".github/assets/apercu-ex6-formulaire-connexion.png" width="300"/>
 
 ### Les règles de validation
 
@@ -1099,6 +1111,10 @@ graph LR
 
 ![Maquette CercleInteractif](src/main/resources/assets/maquette_cercle_interactif.svg)
 
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 7 : cercle dont le rayon est lié à un slider et un champ (liaison bidirectionnelle)" src=".github/assets/apercu-ex7-cercle-interactif.png" width="460"/>
+
 Le cercle est centré dans le panneau par binding (`centerX.bind(pane.widthProperty().divide(2))`), le slider a une valeur max de 250, et le rayon initial est 150.
 
 ### Découverte du code
@@ -1216,6 +1232,10 @@ Sans ce drapeau, le listener sur `celsius` modifie `fahrenheit`, qui declenche l
 ### Maquette attendue
 
 ![Maquette ConvertisseurTemperatures](src/main/resources/assets/maquette_convertisseur.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 8 : convertisseur de températures (Celsius / Fahrenheit) en liaison bidirectionnelle" src=".github/assets/apercu-ex8-convertisseur.png" width="240"/>
 
 ### Découverte du code
 
