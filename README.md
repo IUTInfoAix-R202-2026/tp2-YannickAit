@@ -68,8 +68,8 @@ La progression du module prépare directement à cet objectif :
 ---
 
 > [!NOTE]
-> **Mise en place, commandes, workflow Git, assistance IA et dépannage : identiques au TP1.** Pour ne pas dupliquer ce qui a déjà été présenté, reportez-vous au README du TP1 :
-> [Mise en place (Classroom + Codespace)](https://github.com/IUTInfoAix-R202/tp1#mise-en-place) · [Commandes Maven essentielles](https://github.com/IUTInfoAix-R202/tp1#commandes-essentielles) · [Workflow Git par exercice](https://github.com/IUTInfoAix-R202/tp1#workflow-de-développement---un-cycle-par-exercice) · [Assistance IA (Copilot Chat)](https://github.com/IUTInfoAix-R202/tp1#assistance-ia) · [Dépannage](https://github.com/IUTInfoAix-R202/tp1#dépannage)
+> **Mise en place, évaluation, commandes, workflow Git, assistance IA et dépannage : identiques au TP1.** Pour ne pas dupliquer ce qui a déjà été présenté, reportez-vous au README du TP1 :
+> [Mise en place (Classroom + Codespace)](https://github.com/IUTInfoAix-R202/tp1#mise-en-place) · [Comment vous êtes évalué·e](https://github.com/IUTInfoAix-R202/tp1#rendu-du-travail-et-évaluation) · [Commandes Maven essentielles](https://github.com/IUTInfoAix-R202/tp1#commandes-essentielles) · [Workflow Git par exercice](https://github.com/IUTInfoAix-R202/tp1#workflow-de-développement---un-cycle-par-exercice) · [Assistance IA (Copilot Chat)](https://github.com/IUTInfoAix-R202/tp1#assistance-ia) · [Dépannage](https://github.com/IUTInfoAix-R202/tp1#dépannage)
 
 Le TP2 comporte **8 exercices principaux + 2 bonus**, à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet (code et tests en miroir) et embarque ses propres commandes git dans sa section « Travail à faire » : vous créez une branche, activez les tests un par un, implémentez le minimum, puis poussez.
 
