@@ -634,6 +634,7 @@ Le facteur d'échelle est 50 : chaque slider varie de **0 à 10**, ce qui corres
      l1.endYProperty().bind(modele.y2Property().multiply(50));
      ```
    - Ajoutez les 3 lignes à `dessin.getChildren()`
+   - Pour coller à la maquette, ajoutez **par-dessus les lignes** un **marqueur coloré** à chaque sommet (`Circle` de rayon 5 : P1 `#e74c3c`, P2 `#27ae60`, P3 `#8e44ad`) et une **étiquette** `Text` « P1 » / « P2 » / « P3 ». Liez leurs positions au modèle comme les lignes (`marqueurP1.centerXProperty().bind(modele.x1Property().multiply(50))`, etc. ; pour les étiquettes, décalez de quelques pixels avec `.add(8)` / `.subtract(8)`).
 
 6. **Vérifiez visuellement** : `./mvnw javafx:run`
 
