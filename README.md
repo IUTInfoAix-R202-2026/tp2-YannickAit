@@ -856,7 +856,7 @@ graph LR
 
 <img alt="Rendu final - Exercice 5 : calculatrice de triangle avec sliders et tracé" src=".github/assets/apercu-ex5-calculatrice-triangle.png" width="520"/>
 
-Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce qui correspond à -250 px à 250 px sur le panneau de dessin (centrée sur 250,250). Ainsi, si `x1 = 5`, la ligne part de `5 * 50 = 250` pixels depuis le bord gauche du panneau.
+Le facteur d'échelle est 50 : chaque slider varie de **0 à 10**, ce qui correspond à **0 à 500 px** sur le panneau de dessin (500 × 500). Ainsi, si `x1 = 5`, la ligne part de `5 * 50 = 250` pixels depuis le bord gauche du panneau. Les sliders ont des valeurs initiales non nulles, pour qu'un triangle soit dessiné dès l'ouverture (sinon les trois points sont confondus en (0, 0) et le panneau paraît vide).
 
 ### Découverte du code
 
@@ -884,7 +884,7 @@ Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce
 | 5 | `lesSlidersOntDesTickMarks` | `showTickLabels`, `showTickMarks`, `snapToTicks` = true | Config slider |
 | 6 | `leTextFieldAireExiste` | `#aire` existe et `isEditable() == false` | TextField non editable |
 | 7 | `leTextFieldAireEstLieParBinding` | `textProperty().isBound() == true` | `bind()` |
-| 8 | `deplacerSliderModifieAire` | sx2=6, sy3=3 -> TextField contient "9" | Connexion modele/vue |
+| 8 | `deplacerSliderModifieAire` | P1(0,0) P2(6,0) P3(0,3) -> TextField contient "9" | Connexion modele/vue |
 | 9 | `lePanneauDessinExiste` | `#dessin` est un `Pane` | Pane de dessin |
 | 10 | `lesTroisLignesExistent` | 3 objets `Line` dans `#dessin` | Dessin du triangle |
 | 11 | `deplacerSliderModifieLeDessin` | sx1=5, sy1=3 -> `startX=250`, `startY=150` | Binding coords * 50 |
@@ -899,7 +899,7 @@ Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce
    - `Scene` + `stage.show()`
 
 3. **Activez les tests 4-5** et ajoutez les 6 sliders :
-   - Pour chaque coordonnée : `Slider s = new Slider(-5, 5, 0)` avec `setId("slider-x1")` etc.
+   - Pour chaque coordonnée : `Slider s = new Slider(0, 10, valeurInitiale)` avec `setId("slider-x1")` etc. (les valeurs initiales sont déjà fixées dans les champs)
    - Configurez `setShowTickLabels(true)`, `setShowTickMarks(true)`, `setSnapToTicks(true)`
    - Ajoutez label + slider dans le `GridPane`
 
