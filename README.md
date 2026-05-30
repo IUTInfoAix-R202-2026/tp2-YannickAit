@@ -395,16 +395,16 @@ Le TP2 adopte une approche déclarative.
 
 2. **Activez les tests 1-7 de `BoutonCouleurTest`** et complétez `BoutonCouleur` :
    - Dans le constructeur `BoutonCouleur(String texte, String couleur)`, ajoutez : `setOnAction(e -> nbClics.set(nbClics.get() + 1));`
-   - Pour coller à la maquette, **colorez le bouton avec sa couleur** : `setStyle("-fx-background-color: " + couleur + "; -fx-text-fill: white; -fx-font-weight: bold;")`
+   - Pour coller à la maquette, **colorez le bouton avec sa couleur** et arrondissez-le : `setStyle("-fx-background-color: " + couleur + "; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;")`
    - Le champ `nbClics` et les accesseurs sont déjà fournis
    - Vérifiez : `./mvnw test`
 
 3. **Activez les tests 1-3 de `PaletteReactiveTest`** et implémentez la structure dans `start()` :
    - Créez un `BorderPane root`
    - Créez les trois `BoutonCouleur` avec leurs IDs (`setId("btn-rouge")` etc.)
-   - Créez un `HBox` et placez-le en `root.setTop()`
+   - Créez un `HBox` (un peu d'espacement et de padding) et placez-le en `root.setTop()`
    - Créez un `Pane zone` (id "zone", `setMinSize(300, 200)`) en `root.setCenter()`
-   - Créez un `Label labelCompteurs` (id "compteurs") en `root.setBottom()`
+   - Créez un `Label labelCompteurs` (id "compteurs") en `root.setBottom()`, **centré comme une barre de statut** (`setMaxWidth(Double.MAX_VALUE)` + `setAlignment(Pos.CENTER)`)
    - Appelez `createBindings(...)` puis créez la `Scene` et appelez `show()`
 
 4. **Activez les tests 4-15** et implémentez `createBindings()` :
@@ -844,8 +844,8 @@ Le cercle est centré dans le panneau par binding (`centerX.bind(pane.widthPrope
 
 2. **Activez les tests 1-4** et créez les composants de base :
    - `Circle cercle = new Circle(150)` avec `setId("cercle")`. Pour coller à la maquette, donnez-lui un **fond bleu clair et un contour bleu** : `cercle.setFill(Color.web("#cfe8fb"))` et `cercle.setStroke(Color.web("#2980b9"))` (sinon le cercle est noir par défaut).
-   - `Slider slider = new Slider(0, 250, 150)` avec `setId("slider")`
-   - `TextField tfRayon = new TextField()` avec `setId("rayon")`
+   - `Slider slider = new Slider(0, 250, 150)` avec `setId("slider")`. Pour coller à la maquette, **affichez ses bornes 0 / 250** (`setShowTickLabels(true)`, `setMajorTickUnit(250)`, `setMinorTickCount(0)`, `setShowTickMarks(false)`) et placez-le **en bas**, à côté du champ rayon (un `HBox` : slider qui s'étire via `HBox.setHgrow(slider, Priority.ALWAYS)` + le `TextField` à droite).
+   - `TextField tfRayon = new TextField()` avec `setId("rayon")` (largeur réduite, ex. `setMaxWidth(70)`)
 
 3. **Activez les tests 5-7** et liez le slider au cercle :
    ```java
