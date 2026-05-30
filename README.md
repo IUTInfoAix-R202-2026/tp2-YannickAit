@@ -396,6 +396,7 @@ Le TP2 adopte une approche déclarative. La différence est fondamentale :
 
 2. **Activez les tests 1-7 de `BoutonCouleurTest`** et complétez `BoutonCouleur` :
    - Dans le constructeur `BoutonCouleur(String texte, String couleur)`, ajoutez : `setOnAction(e -> nbClics.set(nbClics.get() + 1));`
+   - Pour coller à la maquette, **colorez le bouton avec sa couleur** : `setStyle("-fx-background-color: " + couleur + "; -fx-text-fill: white; -fx-font-weight: bold;")`
    - Le champ `nbClics` et les accesseurs sont déjà fournis
    - Vérifiez : `./mvnw test`
 
@@ -843,7 +844,7 @@ Le cercle est centré dans le panneau par binding (`centerX.bind(pane.widthPrope
 1. **Créez une branche** : `git checkout -b exercice7`
 
 2. **Activez les tests 1-4** et créez les composants de base :
-   - `Circle cercle = new Circle(150)` avec `setId("cercle")`
+   - `Circle cercle = new Circle(150)` avec `setId("cercle")`. Pour coller à la maquette, donnez-lui un **fond bleu clair et un contour bleu** : `cercle.setFill(Color.web("#cfe8fb"))` et `cercle.setStroke(Color.web("#2980b9"))` (sinon le cercle est noir par défaut).
    - `Slider slider = new Slider(0, 250, 150)` avec `setId("slider")`
    - `TextField tfRayon = new TextField()` avec `setId("rayon")`
 
@@ -988,6 +989,8 @@ Sans ce drapeau, le listener sur `celsius` modifie `fahrenheit`, qui declenche l
    ```
 
 4. **Activez les tests 8-11** : vérifiez que les TextFields restent synchronisés après les conversions. Si le binding bidirectionnel entre les TextFields et les sliders est en place depuis l'étape 2, cela doit fonctionner automatiquement.
+
+5. **Style (pour coller à la maquette, non testé)** : chaque slider + champ vit dans un panneau (`VBox` centré, bordé). En tête de chaque panneau, un `Label` pleine largeur sert d'**en-tête de carte coloré** : « Celsius (°C) » sur fond bleu `#4a90d9`, « Fahrenheit (°F) » sur fond rouge `#e74c3c`, texte blanc gras (`label.setMaxWidth(Double.MAX_VALUE)` + `setStyle("-fx-background-color: #4a90d9; -fx-text-fill: white; ... -fx-alignment: center;")`).
 
 5. **Vérifiez** : `./mvnw javafx:run` et `./mvnw test`
 
