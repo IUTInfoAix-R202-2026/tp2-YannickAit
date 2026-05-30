@@ -767,6 +767,15 @@ Comme la maquette, deux états : à gauche le formulaire **vide** (mot de passe 
    - Annuler : `userId.clear(); pwd.clear();`
    - OK : `labelMessage.setText("Bienvenue " + userId.getText() + " (" + "*".repeat(pwd.getText().length()) + ")");`
 
+7. **Style des boutons (cf. maquette, non testé)** : **gris** tant qu'ils sont désactivés, puis **vert (OK)** / **rouge (Annuler)** une fois actifs. On lie `styleProperty()` à `disabledProperty()` :
+   ```java
+   String gris = "-fx-background-color: #cccccc; -fx-text-fill: #777777; -fx-background-radius: 6; -fx-opacity: 1;";
+   btnOk.styleProperty().bind(Bindings.when(btnOk.disabledProperty())
+       .then(gris)
+       .otherwise("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"));
+   // idem pour btnCancel avec #e74c3c
+   ```
+
 7. **Vérifiez** : `./mvnw javafx:run` et `./mvnw test`
 
 8. **Finalisez** :
