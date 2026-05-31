@@ -22,6 +22,10 @@
 
 ## TP2 - Propriétés et bindings
 
+> 🎓 **Accepter le devoir TP2 sur GitHub Classroom** : 👉 **https://classroom.github.com/a/o8W7l2oc**
+>
+> Cela crée votre dépôt personnel `IUTInfoAix-R202-2026/tp2-votreLogin`. La marche à suivre (Classroom puis Codespace) est commune à tous les TP : voir le [TP1](https://github.com/IUTInfoAix-R202/tp1#mise-en-place).
+
 > Cours associé : [CM2 - Propriétés, bindings et contrôles](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html)
 
 ---
