@@ -1,0 +1,19 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph TD
+    x1 --> det["determinant NumberBinding"]
+    y1 --> det
+    x2 --> det
+    y2 --> det
+    x3 --> det
+    y3 --> det
+    det --> abs["Bindings.when(det >= 0) .then(det / 2) .otherwise(-det / 2)"]
+    abs --> area["area DoubleProperty (lié)"]
+    style x1 fill:#4a90d9,color:white
+    style y1 fill:#4a90d9,color:white
+    style x2 fill:#4a90d9,color:white
+    style y2 fill:#4a90d9,color:white
+    style x3 fill:#4a90d9,color:white
+    style y3 fill:#4a90d9,color:white
+    style det fill:#e8a838,color:white
+    style abs fill:#e8a838,color:white
+    style area fill:#7bb563,color:white

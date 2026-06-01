@@ -1,0 +1,16 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph TD
+    subgraph TP1 - Imperatif
+        C1["Clic sur Rouge"] --> H1["handler: nbClics[0]++ labelTotal.setText(...)"]
+    end
+    subgraph TP2 - Declaratif
+        C2["Clic sur Rouge"] --> H2["handler: nbClics.set(nbClics.get()+1)"]
+        H2 -.propagation auto.-> B2["Binding: Bindings.concat('Rouge: ', nbClics)"]
+        B2 -.mis a jour auto.-> L2["labelCompteurs.textProperty()"]
+    end
+    style H1 fill:#e8a838,color:white
+    style H2 fill:#e8a838,color:white
+    style B2 fill:#e8a838,color:white
+    style L2 fill:#7bb563,color:white
+    style C1 fill:#b0bec5,color:#333
+    style C2 fill:#b0bec5,color:#333

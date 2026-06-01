@@ -1,0 +1,11 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    S["source SimpleIntegerProperty valeur = 42"]
+    C["cible SimpleIntegerProperty isBound = true"]
+    S -- "cible.bind(source)" --> C
+    S -- "source.set(99)" --> S2["source valeur = 99"]
+    S2 -- "propagation auto" --> C2["cible valeur = 99"]
+    style S fill:#4a90d9,color:white
+    style S2 fill:#4a90d9,color:white
+    style C fill:#7bb563,color:white
+    style C2 fill:#7bb563,color:white

@@ -1,0 +1,14 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    P["IntegerProperty valeur = 1024"]
+    IL["InvalidationListener (paresseux)"]
+    CL["ChangeListener (eager)"]
+    P -- "addListener()" --> IL
+    P -- "addListener()" --> CL
+    P -- "set(2105)" --> N["Notification"]
+    N -. "1 seule fois tant que non relu" .-> IL
+    N -- "à chaque changement old=1024, new=2105" --> CL
+    style P fill:#4a90d9,color:white
+    style IL fill:#e8a838,color:white
+    style CL fill:#e8a838,color:white
+    style N fill:#8e44ad,color:white

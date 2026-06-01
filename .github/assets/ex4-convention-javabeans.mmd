@@ -1,0 +1,13 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    P["IntegerProperty x1 (champ privé)"]
+    G["getX1() retourne x1.get()"]
+    S["setX1(int v) x1.set(v)"]
+    A["x1Property() retourne x1"]
+    P --> G
+    P --> S
+    P --> A
+    style P fill:#4a90d9,color:white
+    style G fill:#e8a838,color:white
+    style S fill:#e8a838,color:white
+    style A fill:#e8a838,color:white

@@ -1,0 +1,11 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    VX["vitesseX DoubleProperty"]
+    CX["cercle.centerX DoubleProperty"]
+    BORD["toucheBordX BooleanBinding (centerX <= r || centerX >= largeur-r)"]
+
+    CX --> BORD
+    BORD -- "Bindings.when(toucheBord) .then(vitesseX.negate()) .otherwise(vitesseX)" --> VX
+    style VX fill:#4a90d9,color:white
+    style CX fill:#4a90d9,color:white
+    style BORD fill:#e8a838,color:white

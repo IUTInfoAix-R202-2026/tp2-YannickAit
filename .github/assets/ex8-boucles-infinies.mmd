@@ -1,0 +1,6 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    C["sliderCelsius valeur = 100"] -- "ChangeListener F = C*9/5+32" --> F["sliderFahrenheit valeur = 212"]
+    F -- "ChangeListener C = (F-32)*5/9" --> C
+    style C fill:#4a90d9,color:white
+    style F fill:#7bb563,color:white

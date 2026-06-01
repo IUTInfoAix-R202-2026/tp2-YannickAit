@@ -1,0 +1,13 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    subgraph bind - unidirectionnel
+        A1["source"] -- "toujours vers" --> B1["cible (isBound=true)"]
+    end
+    subgraph bindBidirectional - dans les deux sens
+        A2["propriete A"] <-- "modification" --> B2["propriete B"]
+        B2 <-- "modification" --> A2
+    end
+    style A1 fill:#4a90d9,color:white
+    style B1 fill:#7bb563,color:white
+    style A2 fill:#e8a838,color:white
+    style B2 fill:#e8a838,color:white

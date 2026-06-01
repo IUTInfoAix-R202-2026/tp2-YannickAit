@@ -1,0 +1,16 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+sequenceDiagram
+    participant Code
+    participant Prop as IntegerProperty
+    participant IL as InvalidationListener
+
+    Code->>Prop: set(2105)
+    Prop->>IL: invalidated() ✅
+    Note over IL: Notifié !
+    Code->>Prop: set(5012)
+    Note over IL: PAS notifié ❌ (pas de get() entre-temps)
+    Code->>Prop: get()
+    Note over Prop: Revalidée
+    Code->>Prop: set(1024)
+    Prop->>IL: invalidated() ✅
+    Note over IL: Notifié à nouveau !

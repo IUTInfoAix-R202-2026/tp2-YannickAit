@@ -1,0 +1,17 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph TD
+    Timer["AnimationTimer boucle de jeu"] --> Deplacement["balle.centerX += vitesseX balle.centerY += vitesseY"]
+    Deplacement --> CollisionBord["balle touche bord haut/bas : vitesseY.negate()"]
+    Deplacement --> CollisionRaquette["balle intersecte raquette : vitesseX.negate()"]
+    Deplacement --> Sortie["balle sort par gauche/droite : score++ + reset position"]
+    ScoreG["scoreGauche IntegerProperty"] --> LabelG["labelScoreGauche (lié par binding)"]
+    ScoreD["scoreDroite IntegerProperty"] --> LabelD["labelScoreDroite (lié par binding)"]
+    style Timer fill:#e8a838,color:white
+    style Deplacement fill:#e8a838,color:white
+    style CollisionBord fill:#b0bec5,color:#333
+    style CollisionRaquette fill:#b0bec5,color:#333
+    style Sortie fill:#b0bec5,color:#333
+    style ScoreG fill:#4a90d9,color:white
+    style ScoreD fill:#4a90d9,color:white
+    style LabelG fill:#7bb563,color:white
+    style LabelD fill:#7bb563,color:white

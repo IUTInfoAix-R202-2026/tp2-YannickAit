@@ -1,0 +1,16 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph TD
+    userId["#user-id textProperty()"]
+    pwd["#pwd textProperty()"]
+
+    userId -- "longueur >= 6" --> pwdEditable["pwd.editableProperty()"]
+    userId -- "inclus dans" --> binValide["BooleanBinding formValid.computeValue()"]
+    pwd -- "longueur >= 8 + majuscule + chiffre" --> binValide
+    binValide -- "not()" --> okDisable["#btn-ok disableProperty()"]
+    binValide --> cancelActive["#btn-cancel disableProperty()"]
+    style userId fill:#4a90d9,color:white
+    style pwd fill:#4a90d9,color:white
+    style binValide fill:#e8a838,color:white
+    style pwdEditable fill:#7bb563,color:white
+    style okDisable fill:#7bb563,color:white
+    style cancelActive fill:#7bb563,color:white

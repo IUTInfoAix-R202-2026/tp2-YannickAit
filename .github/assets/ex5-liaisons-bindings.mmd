@@ -1,0 +1,34 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+graph LR
+    SX1["#slider-x1"]
+    SY1["#slider-y1"]
+    SX2["#slider-x2"]
+    SY2["#slider-y2"]
+    SX3["#slider-x3"]
+    SY3["#slider-y3"]
+    TF["#aire (TextField)"]
+    L1["Line 1 (P1-P2)"]
+    L2["Line 2 (P2-P3)"]
+    L3["Line 3 (P3-P1)"]
+    AT["AireTriangle x1,y1,x2,y2,x3,y3 areaProperty()"]
+    SX1 -- "x1Property().bind(value)" --> AT
+    SY1 -- "y1Property().bind(value)" --> AT
+    SX2 -- "x2Property().bind(value)" --> AT
+    SY2 -- "y2Property().bind(value)" --> AT
+    SX3 -- "x3Property().bind(value)" --> AT
+    SY3 -- "y3Property().bind(value)" --> AT
+    AT -- "areaProperty().asString()" --> TF
+    AT -- "start (x1,y1), end (x2,y2), ×50" --> L1
+    AT -- "start (x2,y2), end (x3,y3), ×50" --> L2
+    AT -- "start (x3,y3), end (x1,y1), ×50" --> L3
+    style SX1 fill:#4a90d9,color:white
+    style SY1 fill:#4a90d9,color:white
+    style SX2 fill:#4a90d9,color:white
+    style SY2 fill:#4a90d9,color:white
+    style SX3 fill:#4a90d9,color:white
+    style SY3 fill:#4a90d9,color:white
+    style AT fill:#e8a838,color:white
+    style TF fill:#7bb563,color:white
+    style L1 fill:#7bb563,color:white
+    style L2 fill:#7bb563,color:white
+    style L3 fill:#7bb563,color:white
