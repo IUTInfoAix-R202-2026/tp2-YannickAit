@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -32,21 +31,21 @@ class CalculatriceTriangleTest {
     new CalculatriceTriangle().start(stage);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(1)
   void laFenetreEstVisible(FxRobot robot) {
     assertThat(stage.isShowing()).as("le Stage doit être affiché").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(2)
   void laSceneExiste(FxRobot robot) {
     assertThat(stage.getScene()).as("le Stage doit avoir une Scene").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(3)
   void laRacineEstUnGridPane(FxRobot robot) {
@@ -55,7 +54,7 @@ class CalculatriceTriangleTest {
         .isInstanceOf(GridPane.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(4)
   void lesSixSlidersExistent(FxRobot robot) {
@@ -67,7 +66,7 @@ class CalculatriceTriangleTest {
     assertThat(robot.lookup("#slider-y3").queryAs(Slider.class)).as("slider-y3").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(5)
   void lesSlidersOntDesTickMarks(FxRobot robot) {
@@ -77,7 +76,7 @@ class CalculatriceTriangleTest {
     assertThat(s.isSnapToTicks()).as("slider doit snapper aux ticks").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(6)
   void leTextFieldAireExiste(FxRobot robot) {
@@ -86,7 +85,7 @@ class CalculatriceTriangleTest {
     assertThat(tf.isEditable()).as("le TextField aire ne doit pas être éditable").isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(7)
   void leTextFieldAireEstLieParBinding(FxRobot robot) {
@@ -96,7 +95,7 @@ class CalculatriceTriangleTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(8)
   void deplacerSliderModifieAire(FxRobot robot) {
@@ -112,7 +111,7 @@ class CalculatriceTriangleTest {
         .contains("9");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(9)
   void lePanneauDessinExiste(FxRobot robot) {
@@ -120,7 +119,7 @@ class CalculatriceTriangleTest {
     assertThat(dessin).as("un Pane avec id 'dessin' doit exister").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(10)
   void lesTroisLignesExistent(FxRobot robot) {
@@ -129,7 +128,7 @@ class CalculatriceTriangleTest {
     assertThat(nbLignes).as("le panneau de dessin doit contenir 3 lignes (Line)").isEqualTo(3);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(11)
   void deplacerSliderModifieLeDessin(FxRobot robot) {
@@ -152,7 +151,7 @@ class CalculatriceTriangleTest {
         .isEqualTo(150.0);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(12)
   void aireCorrectePourTriangleConnu(FxRobot robot) {
